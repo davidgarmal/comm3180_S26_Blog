@@ -2,18 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://davidgarmal.github.io/comm3180_S26_Blog/about.html</loc>
-    <lastmod>2026-01-24T21:51:51.920Z</lastmod>
-  </url>
-  <url>
-    <loc>https://davidgarmal.github.io/comm3180_S26_Blog/posts/000_test_post/index.html</loc>
-    <lastmod>2026-01-24T21:51:51.920Z</lastmod>
-  </url>
-  <url>
-    <loc>https://davidgarmal.github.io/comm3180_S26_Blog/index.html</loc>
-    <lastmod>2026-01-24T21:51:51.920Z</lastmod>
+    <lastmod>2026-01-28T15:59:53.958Z</lastmod>
   </url>
   <url>
     <loc>https://davidgarmal.github.io/comm3180_S26_Blog/posts/001_testing/testing.html</loc>
-    <lastmod>2026-01-24T21:51:51.920Z</lastmod>
+    <lastmod>2026-01-28T15:59:53.958Z</lastmod>
+  </url>
+  <url>
+    <loc>https://davidgarmal.github.io/comm3180_S26_Blog/index.html</loc>
+    <lastmod>2026-01-28T15:59:53.958Z</lastmod>
+  </url>
+  <url>
+    <loc>https://davidgarmal.github.io/comm3180_S26_Blog/posts/000_test_post/index.html</loc>
+    <lastmod>2026-01-28T15:59:53.958Z</lastmod>
+  </url>
+  <url>
+    <loc>https://davidgarmal.github.io/comm3180_S26_Blog/posts/002_dow1/dow1.html</loc>
+    <lastmod>2026-01-28T15:59:53.958Z</lastmod>
   </url>
 </urlset>

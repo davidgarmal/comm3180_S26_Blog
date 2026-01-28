@@ -7,6 +7,20 @@
     "text": "This blog is about the data handled during the course of COMM 3180."
   },
   {
+    "objectID": "posts/001_testing/testing.html",
+    "href": "posts/001_testing/testing.html",
+    "title": "David’s Test",
+    "section": "",
+    "text": "Testing Blog\nThis initial blog will serve to familiarize myself with the process of creating and updating the blog with GitHub and Jupiter."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "My Data Stories",
+    "section": "",
+    "text": "The Weather in Philadelphia\n\n\n\nDOW\n\nweather\n\n\n\nDataset of the Week 1\n\n\n\n\n\nJan 28, 2026\n\n\nDavid\n\n\n\n\n\n\n\n\n\n\n\n\nDavid’s Test\n\n\n\nBlog\n\n\n\nTesting Blogging\n\n\n\n\n\nJan 22, 2026\n\n\nDavid\n\n\n\n\n\n\n\n\n\n\n\n\nA test post\n\n\n\nvisualization\n\ndata stories\n\n\n\nAn example post from a Jupyter notebook\n\n\n\n\n\nJan 12, 2026\n\n\nAn LLM User\n\n\n\n\n\nNo matching items"
+  },
+  {
     "objectID": "posts/000_test_post/index.html",
     "href": "posts/000_test_post/index.html",
     "title": "A test post",
@@ -21,16 +35,9 @@
     "text": "Stories from data\n\nLet’s set up some data\n\n\nx = ['A', 'B', 'C']\ny = [1, 5, 3]\n\n\nNow let’s visualize it\n\nplt.bar(x, y)\nplt.show()"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "My Data Stories",
-    "section": "",
-    "text": "David’s Test\n\n\n\nBlog\n\n\n\nTesting Blogging\n\n\n\n\n\nJan 22, 2026\n\n\nDavid\n\n\n\n\n\n\n\n\n\n\n\n\nA test post\n\n\n\nvisualization\n\ndata stories\n\n\n\nAn example post from a Jupyter notebook\n\n\n\n\n\nJan 12, 2026\n\n\nAn LLM User\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "posts/001_testing/testing.html",
-    "href": "posts/001_testing/testing.html",
-    "title": "David’s Test",
+    "objectID": "posts/002_dow1/dow1.html",
+    "href": "posts/002_dow1/dow1.html",
+    "title": "The Weather in Philadelphia",
     "section": "",
     "text": "Testing Blog\nThis initial blog will serve to familiarize myself with the process of creating and updating the blog with GitHub and Jupiter."
   }
