@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="David">
-<meta name="dcterms.date" content="2026-02-03">
-<meta name="description" content="Dataset of the Week 1">
+<meta name="dcterms.date" content="2026-03-06">
+<meta name="description" content="Dataset of the Week 4">
 
-<title>Dataset of the Week #1: The Weather in Philadelphia – My Data Stories</title>
+<title>Dataset of the Week #4: Crash Data Philly – My Data Stories</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -148,15 +148,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Dataset of the Week #1: The Weather in Philadelphia</h1>
+      <h1 class="title">Dataset of the Week #4: Crash Data Philly</h1>
                   <div>
         <div class="description">
-          Dataset of the Week 1
+          Dataset of the Week 4
         </div>
       </div>
                           <div class="quarto-categories">
                 <div class="quarto-category">DOW</div>
-                <div class="quarto-category">weather</div>
+                <div class="quarto-category">Philly</div>
+                <div class="quarto-category">crash</div>
               </div>
                   </div>
   </div>
@@ -174,7 +175,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">February 3, 2026</p>
+        <p class="date">March 6, 2026</p>
       </div>
     </div>
     
@@ -193,107 +194,94 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="is-the-weather-in-our-favor-for-spring-fling-2026" class="level1">
-<h1>Is the weather in our favor for Spring Fling 2026?</h1>
-<div id="923c83cd-21e4-43ce-827c-368033c1c177" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="this-is-going-to-ruin-the-tour" class="level1">
+<h1>‘This is going to ruin the tour’</h1>
+<p>Justin Timberlake famously said ‘This is going to ruin the tour’ after being arrested from driving while intoxicated. While the moment created fun and giggles, drunk driving should not be encouraged and has devastating consequences. In Philadelphia, thousands of crashes are reported each year where at least one driver was reported to be under alcohol influence.</p>
+<div id="48d3e2e8-be66-4090-8afd-c9038fe7c50a" class="cell" data-execution_count="31">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> geopandas <span class="im">as</span> gpd</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib <span class="im">as</span> mpl</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datetime <span class="im">as</span> dt</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Load Processed Data</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>fatal_alc <span class="op">=</span> pd.read_csv(<span class="st">'data/philly_fatal_alc.csv'</span>, low_memory<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Load Philly Boundary Map</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>philly_gdf <span class="op">=</span> gpd.read_file(<span class="st">'data/philadelphia_zip_boundaries.geojson'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="d6eb7293-51a3-4505-bce2-87e4fbb6cb61" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>weather_df <span class="op">=</span> pd.read_csv(<span class="st">'data/philadelphia_weather_2005_to_2025.csv'</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>weather_df <span class="op">=</span> weather_df.assign(date<span class="op">=</span>pd.to_datetime(weather_df[<span class="st">'date'</span>]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Thousands of crashes happen each year in Philly, but they might happen for a myriad of reasons. People could be running late and be impulsive. Breaks can fail. Nevertheless, thousands of crashes each year could be prevented by not driving while intoxicated. Using data from the Pennsylvania Department of Transport, we will inspect the cases of alcohol related crashes.</p>
+<div id="c73ba11a-53eb-42d8-834b-534f17b49ef6" class="cell" data-execution_count="32">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>fatal_alc_gpd <span class="op">=</span> gpd.GeoDataFrame(fatal_alc, geometry<span class="op">=</span>gpd.points_from_xy(x<span class="op">=</span>fatal_alc[<span class="st">'DEC_LONGITUDE'</span>], y<span class="op">=</span>fatal_alc[<span class="st">'DEC_LATITUDE'</span>]))</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>fatal_alc_gpd.crs<span class="op">=</span><span class="st">'epsg:4326'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>As a past Spring Fling Daytime director, the weather during the weekend has always been an important part of the experience. From being really cold at 6 am for setup to raining during the night so the field is wet, weather can make the experience for the volunteers and attendees more or less pleasant. Last year, it rained the night between Concerts and Daytime, but it also rained on and off between 6am and 3 pm of Saturday, which caused the festival to be delayed by 30 minutes.</p>
-<p><img src="img/flingsky25.jpg" class="img-fluid" width="300"></p>
-<section id="how-is-it-looking-spring-fling-2026" class="level3">
-<h3 class="anchored" data-anchor-id="how-is-it-looking-spring-fling-2026">How is it looking Spring Fling 2026?</h3>
-<p>This year, Spring Fling weekend will be on April 17 and 18. Using past 21 years of data, we might be able to estimate what the weather will be like for Fling Weekend.</p>
-<div id="f497024e-e31b-4500-a26c-a0ce43ad49e3" class="cell" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>concert26 <span class="op">=</span> pd.to_datetime(</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">dict</span>(</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        year<span class="op">=</span>weather_df[<span class="st">"date"</span>].dt.year,</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        month<span class="op">=</span><span class="dv">4</span>,</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        day<span class="op">=</span><span class="dv">17</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>fling_end <span class="op">=</span> concert26 <span class="op">+</span> pd.Timedelta(days<span class="op">=</span><span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div id="b65955cb-5000-459a-8410-440752c50933" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>fweekend_filter <span class="op">=</span> (weather_df[<span class="st">'date'</span>]<span class="op">&gt;=</span>concert26) <span class="op">&amp;</span> (weather_df[<span class="st">'date'</span>]<span class="op">&lt;=</span>fling_end)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div id="30bbcdd8-625f-4b7a-960a-dfe2fc26d259" class="cell" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>flingweekend_df <span class="op">=</span> (weather_df.</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>                    loc[fweekend_filter].</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                    groupby(<span class="st">'year'</span>)[[<span class="st">'high'</span>,<span class="st">'low'</span>,<span class="st">'rain'</span>]].</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                    agg(</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>                       [<span class="bu">min</span>,<span class="bu">max</span>,np.mean, np.std]</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>                    ).</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>                    <span class="bu">round</span>(<span class="dv">1</span>)</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>                )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>At the time of setup, it is normally along the coldest parts of the day, so we can look at the lowest temperatures of April 17 and 18.</p>
-<div id="59f27856-acf0-4b05-9451-76bf16d5263f" class="cell" data-execution_count="13">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>flingweekend_df[<span class="st">'low'</span>,<span class="st">'mean'</span>].plot(kind<span class="op">=</span><span class="st">'line'</span>, style<span class="op">=</span><span class="st">'-o'</span>, color<span class="op">=</span><span class="st">'b'</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>plt.axhline(flingweekend_df[(<span class="st">'low'</span>,<span class="st">'mean'</span>)].mean(), color<span class="op">=</span><span class="st">'r'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, label<span class="op">=</span><span class="st">'Mean'</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Philadelphia Average Low temperature on April 17 &amp; 18  2005-2025'</span>)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Temperature (°F)'</span>)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Year'</span>)</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="4d1e7c1b-d0be-45bd-8342-119c43b73bda" class="cell" data-execution_count="33">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>base<span class="op">=</span>philly_gdf.plot(color<span class="op">=</span><span class="st">'white'</span>, </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                     edgecolor<span class="op">=</span><span class="st">'gray'</span>, figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">8</span>))</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>fatal_alc_gpd.plot(ax<span class="op">=</span>base,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>                          markersize<span class="op">=</span><span class="dv">8</span>, </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                          column<span class="op">=</span><span class="st">'CRASH_YEAR'</span>, </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                          categorical<span class="op">=</span><span class="va">True</span>, </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>                          legend<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>                          legend_kwds<span class="op">=</span>{<span class="st">'bbox_to_anchor'</span>: (<span class="fl">1.05</span>, <span class="dv">1</span>), <span class="st">'loc'</span>: <span class="st">'upper left'</span>}</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>                         )</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Alcohol related fatal crashes in Philadelphia 2005-2024'</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="dow1_files/figure-html/cell-7-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="dow4_files/figure-html/cell-4-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>As we can see, the coldest it has been was around 35 degrees in 2022. On the contrary, the the low has been higher than 55 in years like 2012. On average, the low during April 17 and 18 has been around 46 degrees Farenheit (or 7 degrees Celsius).</p>
-<p>When looking at the highest temperatures throughout the days, we can see that the lowest highs happened on 2018, 2020, and 2022 with 50 degrees. On the contrary, we have gotten as high as 80 degrees on years like 2008. On average, the high for the pair of days seem to be around 65 degrees.</p>
-<div id="3571f9b6-c6d0-4f7c-a0b2-c9ef4d25179c" class="cell" data-execution_count="16">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>flingweekend_df[<span class="st">'high'</span>,<span class="st">'mean'</span>].plot(kind<span class="op">=</span><span class="st">'line'</span>, style<span class="op">=</span><span class="st">'-o'</span>, color<span class="op">=</span><span class="st">'orange'</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>plt.axhline(flingweekend_df[(<span class="st">'high'</span>,<span class="st">'mean'</span>)].mean(), color<span class="op">=</span><span class="st">'r'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, label<span class="op">=</span><span class="st">'Mean'</span>)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Philadelphia Average High temperature on April 17 &amp; 18  2005-2025'</span>)</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Temperature (°F)'</span>)</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Year'</span>)</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>As observed in the map, Broad Street and the Roosevelt Boulevard are the main road where these fatalities happen. But since our data set is from 2005 to 2024, we can inspect the trends in fatal crashes that are alcohol related.</p>
+<div id="3add1136-c3af-4c9d-b0da-21092d0ed4f7" class="cell" data-execution_count="34">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Group by Year</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>yearly_trends <span class="op">=</span> fatal_alc_gpd.groupby(<span class="st">'CRASH_YEAR'</span>).size()</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting the trend</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>yearly_trends.plot(kind<span class="op">=</span><span class="st">'line'</span>, marker<span class="op">=</span><span class="st">'o'</span>, color<span class="op">=</span><span class="st">'crimson'</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Trend of Fatal Alcohol-Related Crashes in Philly (2005-2024)'</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Number of Fatal Crashes'</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, alpha<span class="op">=</span><span class="fl">0.7</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="dow1_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="dow4_files/figure-html/cell-5-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Then, according to data from previous years, the average range of temperature on April 17 and April 18 seems to be from 45 to 65, which seems like a comfortable range. It might be useful for the directors and volunteers to layer up so they stay warm during set up, but they are not that hot during the festival itself.</p>
-<section id="what-about-rain" class="level4">
-<h4 class="anchored" data-anchor-id="what-about-rain">What about rain?</h4>
-<p>Rain can be one of the less productive things to happen on Fling Weekend. In addition to making setup more uncomfortable, rain can make the operations cost of fling more expensive. If it rains during the Friday of the concert, it might make workers stop setting up the floor, which significantly increases labor costs.</p>
-<div id="895d1c4b-5925-4bcf-857a-a339c366f9ea" class="cell" data-execution_count="24">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>flingweekend_df[<span class="st">'rain'</span>,<span class="st">'max'</span>].plot(kind<span class="op">=</span><span class="st">'line'</span>, style<span class="op">=</span><span class="st">'-o'</span>)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>plt.axhline(flingweekend_df[(<span class="st">'rain'</span>,<span class="st">'max'</span>)].mean(), color<span class="op">=</span><span class="st">'r'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, label<span class="op">=</span><span class="st">'Mean'</span>)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Philadelphia Inches of Rain on April 17 &amp; 18  2005-2025'</span>)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Inches of Rain'</span>)</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Year'</span>)</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>While it seems like fatal crashes have been going down for the past few years, it is worth noting that the data for 2024 only includes the first couple of months. In general, there are at least 20 alcohol related fatal crashes per year in Philadelphia, with a few exceptions.</p>
+<div id="05aedd69-ddf6-444c-9beb-9138d5551361" class="cell" data-execution_count="35">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting the density of crashes</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">10</span>))</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>philly_gdf.plot(ax<span class="op">=</span>ax, color<span class="op">=</span><span class="st">'lightgrey'</span>, edgecolor<span class="op">=</span><span class="st">'white'</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>sns.kdeplot(</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span>fatal_alc_gpd.geometry.x, </span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span>fatal_alc_gpd.geometry.y, </span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    fill<span class="op">=</span><span class="va">True</span>, cmap<span class="op">=</span><span class="st">'Reds'</span>, alpha<span class="op">=</span><span class="fl">0.5</span>, ax<span class="op">=</span>ax</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'Concentration of Alcohol-Related Fatalities'</span>)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="dow1_files/figure-html/cell-9-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="dow4_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>As shown in the graph, it looks like on average, there has been around 0.1 inches of rain during April 17 and 18 over the years. There has only been one year in which it rained torrentialy up to 1.1 inches.</p>
-<p>If we take into account this data from previus year, it looks like it might be a good year for Spring Fling in terms of weather.</p>
+<p>As seen by the density plot, Roosevelt Boulervard does have the highest density of alcohol related crashes. Possible measures to reduce this numbers might be to implement sobriety checkpoints at the entrances to Roosevelt Boulevard.</p>
 
 
-</section>
-</section>
 </section>
 
 </main> <!-- /main -->
